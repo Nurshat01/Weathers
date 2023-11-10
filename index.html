@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./assets/weather.css">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+<div id="weather-app">
+    <div id="search-container">
+        <input type="text" id="city-input" placeholder="Enter city name">
+        <button onclick="searchWeather()">Search</button>
+    </div>
+
+    <div id="current-weather"></div>
+    <div id="forecast"></div>
+    <div id="search-history">
+        <div id="error-message"></div>
+        <div id="last-cities-list"></div>
+    </div>
+</div>
+<script src="./assets/weather.js"></script>
+</body>
+</html>
+
+
+
+
