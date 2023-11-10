@@ -1,7 +1,6 @@
 // API key
 const apiKey = '3977bb5e1b61426933e83f3be4f8c778';
 
-
 function tempConvert(temp) {
     return ((temp - 273.15) * 1.8 + 32).toFixed(2);
 }
@@ -17,7 +16,7 @@ function searchWeather() {
 
     const weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
 
-    // Fetch data from OpenWeatherMap API
+    // -------------Fetch data from OpenWeatherMap API
     fetch(weatherUrl)
         .then(response => {
         if (!response.ok) {
@@ -26,7 +25,7 @@ function searchWeather() {
         return response.json();
     })
         .then(data => {
-        // Process data
+        //--- Process data
         displayWeather(data);
         saveCity(city);
     })
@@ -39,6 +38,10 @@ function searchWeather() {
 function displayWeather(data) {
     const currentWeatherContainer = document.getElementById('current-weather');
     const forecastContainer = document.getElementById('forecast');
+
+    // Clear existing content-----------------------------------------------
+    currentWeatherContainer.innerHTML = '';
+    forecastContainer.innerHTML = '';
 
     currentWeatherContainer.innerHTML += `
         <h2>${data.city.name}, ${data.city.country}</h2>
@@ -53,7 +56,7 @@ function displayWeather(data) {
         const date = new Date(forecast.dt_txt);
         const formattedDate = date.toLocaleDateString();
 
-        // get relevant forecast data
+        // get relevant forecast data-----------------------------------
         forecastContainer.innerHTML += `
             <div class="card">
                 <p>Date: ${formattedDate}</p>
@@ -76,27 +79,27 @@ function showError(message) {
 }
 
 function saveCity(city) {
-    // get the existing cities from localStorage
+    // -------------------------------get the existing cities from localStorage
     const savedCities = JSON.parse(localStorage.getItem('lastCities')) || [];
 
-    // Add the new city
+    // ------------------------Add the new city
     savedCities.unshift(city);
 
-    // Keep the last 5 cities
+    // -----------------Keep the last 5 cities
     const last5Cities = savedCities.slice(0, 5);
 
-    // Save the array back to localStorage
+    // ------------------------Save the array back to localStorage
     localStorage.setItem('lastCities', JSON.stringify(last5Cities));
 
-    // Update the list of last 5 cities
+    // -------Update the list of last 5 cities
     updateLastCitiesList();
 }
 
 function updateLastCitiesList() {
-    // get the last 5 cities
+    // ----------------------------------get the last 5 cities
     const last5Cities = JSON.parse(localStorage.getItem('lastCities')) || [];
 
-    // Display the last 5 cities
+    // ---------------------------------Display the last 5 cities
     const lastCitiesList = document.getElementById('last-cities-list');
     lastCitiesList.innerHTML = '<h3>Last 5 Cities</h3>';
 
